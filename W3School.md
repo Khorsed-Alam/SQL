@@ -131,4 +131,99 @@ ALTER TABLE person1
 DROP City;
 
 ```
+## Unique Constraint on Create Table
 
+<b> Syntax: </b>
+
+```
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+```
+
+## Unique Constrain On Multiple Column
+
+<b>Code: </b>
+```
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName)
+);
+
+```
+
+## Unique Constraint on Alter Table
+
+<B>Code: Single Column</b>
+````
+ALTER TABLE Persons
+ADD UNIQUE (ID);
+````
+
+<B> Code: Multiple Column: </b>
+```
+ALTER TABLE Persons
+ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+```
+
+## Drop Unique Constraint 
+```
+ALTER TABLE Persons
+DROP INDEX UC_Person;
+``` 
+
+## MySql Primary Key Constraint On Create table
+<p> The Primary Key Contraint uniquely indentifies each record in a table. <br> Primary key must be unique and  not null. </p>
+
+<b>Code: Single Primary Key</b>
+``` 
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+```
+<b> Code: Multiple Primary Key</b>
+```
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+
+``` 
+## Primary key on Alter Table
+
+<b>Code: Single Primary Key</b>
+```
+ALTER TABLE Persons
+ADD PRIMARY KEY (ID);
+
+```
+
+<b>Code: Multiple Primary Key</b>
+
+```
+ALTER TABLE Persons
+ADD CONSTRAINT PK_Person PRIMARY KEY (ID,LastName);
+
+```
+
+## Drop Primary Key Constraint
+```
+ALTER TABLE Persons
+DROP PRIMARY KEY;
+``` 
+
+ 
