@@ -1,0 +1,687 @@
+1) 
+Create database gfgsql;
+
+2) 
+-- Create student table
+
+CREATE TABLE student(
+    studentId int PRIMARY KEY,
+    name varchar(255) not null,
+    subject varchar(255),
+    year int,
+    mark int 
+    );
+
+3) 
+-- Create Customer Table
+
+CREATE TABLE Customer(
+    customerid int PRIMARY KEY,
+    firstName varchar(255),
+    lastName varchar(255),
+    country varchar(255),
+    age int check(age>=0 and age<=99),
+    phone int(10)
+    );
+
+4) 
+-- Insert data into the table
+
+Insert into Customer (customerid,firstName,lastname,country,age,phone) VALUES
+(1, 'Luca', 'Bianchi', 'Italy', 23, 'xxxxxxxxxx'),
+(2, 'Aiko', 'Tanaka', 'Japan', 21, 'xxxxxxxxxx'),
+(3, 'Carlos', 'Gomez', 'Spain', 24, 'xxxxxxxxxx'),
+(4, 'Sofia', 'Müller', 'Germany', 22, 'xxxxxxxxxx'),
+(5, 'Ethan', 'Johnson', 'USA', 25, 'xxxxxxxxxx');
+
+
+5)
+-- Create Customerd table
+
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    LastName VARCHAR(50),
+    Country VARCHAR(50),
+    Age INT(2),
+    Phone VARCHAR(10) );
+
+6) 
+-- Insert data into Customerd table
+
+INSERT INTO Customerd (CustomerID, CustomerName, LastName, Country, Age, Phone)
+VALUES   (1, 'Liam', 'Smith', 'USA', 23, 'xxxxxxxxxx'),
+                (2, 'Sophia', 'Miller', 'USA', 21, 'xxxxxxxxxx'),
+                (3, 'Akira', 'Tanaka', 'Japan', 24, 'xxxxxxxxxx'),
+                (4, 'Carlos', 'Hernandez', 'USA', 21, 'xxxxxxxxxx'),
+                (5, 'Isabella', 'Rossi', 'Italy', 22, 'xxxxxxxxxx');
+
+7) 
+ -- Select specific column
+
+ SELECT customerid,customername
+ FROM customer
+
+8) 
+ -- Select all Column
+
+ SELECT *
+ FROM customerd;
+
+9)
+ -- Select statement with where clause
+ 
+ SELECT *
+ FROM customerd
+ WHERE age>21;
+
+10)
+ -- Select statement with Group By clause
+ 
+ SELECT  country, COUNT(*) as customer_count
+ FROM customer
+ GROUP BY country;
+
+11) 
+ -- Select statement with Distinct Clause
+ 
+ SELECT DISTINCT country
+ FROM customerd;
+ 
+ 
+12)
+ -- Select statement with having clause
+
+ SELECT Country, count(*) as customer_count
+ FROM customerd
+ GROUP BY country
+ HAVING COUNT(*)>=2;
+
+13)
+ -- Select statement with orderby
+
+ SELECT *
+ FROM customerd
+ order by age desc ;
+ 
+ 14)
+-- Create employee table and insert value
+
+create table employee
+(
+    empid int,
+    name varchar(255),
+    dept varchar(255),
+    salary int 
+    );
+    INSERT INTO employee(empid,name,dept,salary) VALUES
+    (1,'john','hr',45000),(2,'Emma','IT',60000) ,(3,'David','sales',52000);
+
+
+15) 
+  -- Create Emp1 table
+
+ CREATE TABLE emp1(
+     empid int,
+     name varchar(255),
+     country varchar(255),
+     age int,
+     mob int(10)
+     );
+     
+INSERT INTO Emp1(Empid, Name, Country, Age, Mob)
+VALUES
+(1, 'John', 'USA', 23, '738479734'),
+(2, 'Liam', 'Australia', 21, '436789555'),
+(3, 'Noah', 'Canada', 24, '34873847'),
+(4, 'Oliver', 'UK', 21, '328440934'),
+(5, 'Lucas', 'Spain', 22, '73248679');
+
+ 
+16)
+-- Where clause with logical operator
+
+SELECT * 
+FROM emp1 
+WHERE age=24;
+ 
+
+19) 
+-- Where clause with Comparison operator
+SELECT empid,name,country
+FROM emp1 
+WHERE age>21;
+
+17) 
+-- Where clause with between operator
+
+
+SELECT empid,name,country
+FROM emp1 
+WHERE age BETWEEN 22 and 24;
+
+
+18) 
+-- Where clause with Like operator
+
+SELECT empid,name,country
+FROM emp1 
+WHERE name like 'L%';
+
+
+19)
+-- Where clause with in operator
+
+SELECT empid,name,country,age
+FROM emp1 
+WHERE age in(21,23);
+
+20)
+--Create GfG_employees insert value and show
+
+CREATE TABLE GFG_Employees (
+   id INT PRIMARY KEY,
+   name VARCHAR (20) ,
+   email VARCHAR (25),
+   department VARCHAR(20)
+);
+
+INSERT INTO GFG_Employees (id, name, email, department) VALUES 
+(1, 'Jessie', 'jessie23@gmail.com', 'Development'),
+(2, 'Praveen', 'praveen_dagger@yahoo.com', 'HR'),
+(3, 'Bisa', 'dragonBall@gmail.com', 'Sales'),
+(4, 'Rithvik', 'msvv@hotmail.com', 'IT'),
+(5, 'Suraj', 'srjsunny@gmail.com', 'Quality Assurance'),
+(6, 'Om', 'OmShukla@yahoo.com', 'IT'),
+(7, 'Naruto', 'uzumaki@konoha.com', 'Development');
+
+Select * From GFG_Employees
+
+21)
+-- delete single record
+
+DELETE FROM gfg_employees
+ WHERE name='rithvik';
+ 
+ SELECT*
+ FROM gfg_employees;
+
+
+22) 
+
+-- delete Multiple record
+
+DELETE FROM gfg_employees
+ WHERE  department='development';
+ 
+ SELECT*
+ FROM gfg_employees;
+
+23)
+
+-- Delete all record 
+
+DELETE FROM GFG_Employees;
+Or
+DELETE * FROM GFG_Employees;
+
+
+24)
+-- Rolling back delete operation
+
+
+
+
+
+
+
+25)
+ -- create insert table and insert value
+CREATE TABLE inserttb (
+    ROLL_NO INT PRIMARY KEY,
+    NAME VARCHAR(50),
+    ADDRESS VARCHAR(100),
+    PHONE VARCHAR(15),
+    AGE INT );
+
+INSERT INTO inserttb(ROLL_NO, NAME, ADDRESS, PHONE, AGE) 
+VALUES  (1, 'Liam', 'New York', 'xxxxxxxxxx', 18),
+               (2, 'Sophia', 'Berlin', 'xxxxxxxxxx', 18),
+               (3, 'Akira', 'Tokyo', 'xxxxxxxxxx', 20),
+               (4, 'Carlos', 'Tokyo', 'xxxxxxxxxx', 18);
+
+
+26)
+ -- insert data into specific column
+
+ insert into inserttb (roll_no,name,phone,age)values(5,'Khorsed',111111111111111,22)
+
+
+SELECT*
+FROM inserttb;
+
+
+27)
+-- insert multiple row at once 
+
+INSERT INTO inserttb (ROLL_NO, NAME, ADDRESS, PHONE, AGE) 
+VALUES
+(7, 'Mateo Garcia', 'Madrid', 'xxxxxxxxxx', 15),
+(8, 'Hana Suzuki', 'Osaka', 'xxxxxxxxxx', 18),
+(9, 'Oliver Jensen', 'Copenhagen', 'xxxxxxxxxx', 17),
+(10, 'Amelia Brown', 'London', 'xxxxxxxxxx', 17);
+
+
+28)
+-- insert one table to another
+
+
+
+
+
+
+
+
+
+29)
+-- create (and_or) table -> operation
+
+CREATE TABLE and_or(
+    roll_no int,
+    name varchar(255),
+    address varchar(255), 
+    phone int(10),
+    age int);
+    
+INSERT INTO and_or (ROLL_NO, NAME, ADDRESS, PHONE, Age)
+VALUES
+(1, 'Ram', 'Delhi', 'XXXXXXXXXX', 18),
+(2, 'RAMESH', 'GURGAON', 'XXXXXXXXXX', 18),
+(3, 'SUJIT', 'ROHTAK', 'XXXXXXXXXX', 20),
+(4, 'SURESH', 'Delhi', 'XXXXXXXXXX', 18),
+(3, 'SUJIT', 'ROHTAK', 'XXXXXXXXXX', 20),
+(2, 'RAMESH', 'GURGAON', 'XXXXXXXXXX', 18);
+
+
+30)
+ -- and operator
+ SELECT *
+ FROM and_or
+ WHERE age=18 and address='delhi';
+
+
+
+31)
+ -- or operator
+ SELECT *
+ FROM and_or
+ WHERE name='ram'or name='sujit';
+
+
+32)
+ -- and or operator combine
+ SELECT *
+ FROM and_or
+ WHERE age=18 and(name='ram'or name='sujit');
+
+
+
+33)
+-- create nottb table and insert value
+
+CREATE TABLE nottb (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    City VARCHAR(100),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(50)
+);
+INSERT INTO nottb (CustomerID, CustomerName, City, PostalCode, Country)
+VALUES
+(1, 'John Wick', 'New York', '1248', 'USA'),
+(2, 'Around the Horn', 'London', 'WAI IDP', 'UK'),
+(3, 'Rohan', 'New Delhi', '100084', 'India');
+
+34)
+ -- simple not operator
+ select *
+ from nottb
+ WHERE not country='uk';
+
+35)
+ --  not with in operator
+
+ select *
+ from nottb
+ WHERE not country in('usa','uk');
+
+36) 
+ --  not with like operator
+ select *
+ from nottb
+ WHERE not customername LIKE 'R%';
+
+37)
+-- NOT with NULL Values
+
+
+
+
+
+
+
+38)
+ --  not with and operator
+
+ select *
+ from nottb
+ WHERE not country='usa' and not country='uk';
+
+
+
+39)
+ -- create arithmatic table and insert value
+
+ CREATE table arithmetictb(
+         employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(50),
+    salary INT
+);
+
+INSERT INTO arithmetictb (employee_id, employee_name, salary)
+VALUES
+(1, 'Alex', 25000),
+(2, 'RR', 55000),
+(3, 'JPM', 52000),
+(4, 'GGSHMR', 12312);
+
+
+40)
+ -- addition arithmetic operation
+ SELECT  employee_id,employee_name,salary,salary+100 as "salary+100"
+ from arithmetictb;
+
+41)
+ -- subtraction arithmetic operation
+ SELECT  employee_id,employee_name,salary,salary-100 as "salary-100"
+ from arithmetictb;
+
+
+42)
+ -- subtraction between two column
+ SELECT  employee_id,employee_name,salary,salary-employee_id as "salary-employee_id"
+ from arithmetictb;
+
+43)
+ -- multiplication with constant
+ SELECT  employee_id,employee_name,salary,salary* 100 as "salary*100"
+ from arithmetictb;
+
+
+
+ 44)
+ -- multiplication between two column
+ SELECT  employee_id,employee_name,salary,salary*employee_id as "salary*employee_id"
+ from arithmetictb;
+
+45)
+ -- divisionwith constant
+ SELECT  employee_id,employee_name,salary,salary/100 as "salary/100"
+ from arithmetictb;
+
+46)
+ -- Modulus with constant
+ SELECT  employee_id,employee_name,salary,salary%25000 as "salary%25000"
+ from arithmetictb;
+
+47)
+ -- Modulus between two column
+ SELECT  employee_id,employee_name,salary,salary% employee_id as "salary%employee_id"
+ from arithmetictb;
+
+48) 
+
+-- create distincttb table and insert value
+
+CREATE TABLE distincttb(
+    roll int PRIMARY KEY,
+    name varchar(255),
+    address varchar(255),
+    phone varchar(255),
+    age INT
+    );
+    INSERT INTO DISTINCTtb(ROLL, NAME, ADDRESS, PHONE, AGE)
+VALUES
+(1, 'Liam Johnson', '123 Main Street, New York', '9876543210', 23),
+(2, 'Emma Williams', '456 Park Road, London', '9876543211', 23),
+(3, 'Noah Smith', '789 Market Lane, Toronto', '9876543212', 26),
+(4, 'Olivia Brown', '246 Forest Avenue, Sydney', '9876543213', 22),
+(5, 'James Miller', '7898 Ocean Drive, Los Angeles', '9876543214', 27),
+(6, 'Ava Davis', '34 River View, Dublin', '9876543215', 24),
+(7, 'Liam Johnson', '123 Main Street, New York', '9876543210', 23),
+(8, 'Emma Williams', '456 Park Road, London', '9876543211', 23),
+(9, 'Noah Smith', '789 Market Lane, Toronto', '9876543212', 26),
+(10, 'James Miller', '7898 Ocean Drive, Los Angeles', '9876543214', 27),
+(11, 'Olivia Brown', '246 Forest Avenue, Sydney', '9876543213', 22),
+(12, 'Ava Davis', '34 River View, Dublin', '9876543215', 24);
+
+49)
+ -- fetch unique name
+ SELECT DISTINCT name
+ FROM DISTINCTtb;
+
+50)
+ -- fetch unique combination of multiple column
+ 
+ SELECT DISTINCT name,age
+ FROM DISTINCTtb;
+
+51)
+ -- distincttb with order by clause
+ 
+ SELECT DISTINCT age
+ FROM DISTINCTtb 
+ ORDER BY age DESC;
+
+52)
+ -- distincttb with aggregate function
+ 
+ SELECT count(DISTINCT roll)
+ FROM DISTINCTtb ;
+ 
+53)
+ -- distincttb with null 
+ 
+INSERT INTO DISTINCTtb (ROLL, NAME, ADDRESS, PHONE, AGE)
+VALUES (13, 'John Doe', '123 Unknown Street', '9876543216', NULL);
+
+SELECT DISTINCT AGE FROM DISTINCTtb;
+
+54)
+-- create aggregate table and insert value
+create TABLE  aggregatetb(
+      EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Salary INT
+);
+INSERT INTO aggregatetb(EmpID, Name, Salary)
+VALUES
+(1, 'John', 5000),
+(2, 'Sara', NULL),
+(3, 'Michael', 8000),
+(4, 'Emma', 5000);
+
+
+55)
+ -- count total number of record
+ SELECT count(*) 
+ as total_record 
+ FROM aggregatetb;
+ 
+ 
+ -- count of non null salaries
+ SELECT COUNT(salary)
+ as non_null_salary
+ FROM aggregatetb;
+ 
+ -- count unique non null salaries
+ SELECT count (salary)
+ as unique_non_null_salary
+ FROM aggregatetb;
+
+56)
+ -- sum of all salary
+ SELECT sum(salary)
+ as total_sum
+ FROM aggregatetb;
+
+57)
+ -- sum of distinct salary
+
+ SELECT sum( DISTINCT salary)
+ as total_sum
+ FROM aggregatetb;
+
+58)
+ -- Avg salary
+ SELECT avg(salary)as avgsalary
+ 
+ FROM aggregatetb;
+
+59)
+ -- distinct Avg salary
+ SELECT avg(DISTINCT salary)as avgsalary
+ 
+ FROM aggregatetb;
+
+60)
+ -- Minimum salary
+ SELECT min(salary)as minimumsalary
+ FROM aggregatetb;
+
+61)
+ -- Maximum salary
+ SELECT max(salary)as maximumsalary
+ FROM aggregatetb;
+
+
+62)
+
+-- Create order_by_tb and insert value
+
+CREATE TABLE order_by_tb(
+        roll INT PRIMARY KEY,
+    age INT,
+    name VARCHAR(100),
+    address VARCHAR(200),
+    phone VARCHAR(15)
+);
+
+INSERT INTO order_by_tb(roll, age, name, address, phone)
+VALUES
+(1, 18, 'Shubham Thakur', '123 Main St, Mumbai', '9876543210'),
+(2, 18, 'Mohit Thakur', '321 Main St, Mumbai', '9876543201'),
+(3, 19, 'Abhishek', '567 New Way, Mumbai', '9876543219'),
+(4, 19, 'Aman Chopra', '456 Park Ave, Delhi', '9876543211'),
+(5, 20, 'Naveen Tulasi', '789 Broadway, Ahmedabad', '9876543212'),
+(6, 21, 'Aditya Arpan', '246 5th Ave, Kolkata', '9876543213'),
+(7, 22, 'Nishant Jain', '369 3rd St, Bengaluru', '9876543214');
+
+63)
+ -- Sort by single column
+ SELECT*
+ FROM order_by_tb
+ ORDER BY roll DESC;
+
+
+64)
+-- sort by multiple column 
+
+SELECT * 
+FROM order_by_tb
+ORDER BY age ASC , roll DESC;
+
+
+65)
+-- sorting by column number
+
+SELECT * 
+FROM order_by_tb
+ORDER BY 1 DESC;
+
+
+66) 
+-- create group by table and insert value
+
+CREATE TABLE groupbytb(
+    name varchar(255),
+    year int,
+    subject varchar(255)
+    );
+INSERT INTO Groupbytb (name, year, subject) VALUES
+('Avery', 1, 'Mathematics'),
+('Elijah', 2, 'English'),
+('Harper', 3, 'Science'),
+('James', 1, 'Mathematics'),
+('Charlotte', 2, 'English'),
+('Benjamin', 3, 'Science');
+
+
+67) 
+-- group by single column
+SELECT subject,COUNT(*) as studnt_count
+FROM groupbytb
+GROUP BY subject;
+
+68)
+-- group by multiple column
+SELECT subject,year,COUNT(*) as studnt_count
+FROM groupbytb
+GROUP BY subject,year;
+
+69)
+
+-- create havingtb and insert data
+
+CREATE TABLE havingtb (
+    emp_no int,
+    name varchar(255),
+    sal int, 
+    age INt 
+    );
+    INSERT INTO HAVINGtb (emp_no, name, sal, age) VALUES
+(1, 'Liam', 50000, 25),
+(2, 'Emma', 60000.5, 30),
+(3, 'Noah', 75000.75, 35),
+(4, 'Olivia', 45000.25, 28),
+(5, 'Ethan', 80000, 32),
+(6, 'Sophia', 65000, 27),
+(7, 'Mason', 55000.5, 29),
+(8, 'Isabella', 72000.75, 31),
+(9, 'Logan', 48000.25, 26),
+(10, 'Mia', 83000, 33);
+
+70) 
+ -- having clause: filter by total salary
+ SELECT name , sum(sal)
+ FROM HAVINGtb
+ GROUP BY name
+ HAVING sum(sal)>50000;
+
+
+or
+ -- having clause: filter by total salary
+ SELECT name , sum(sal) as sum_sal
+ FROM HAVINGtb
+ GROUP BY name
+ HAVING sum_sal>50000;
+
+
+71)
+ -- having clause: filter by avg salary
+ SELECT name , avg(sal) as avg_sal
+ FROM HAVINGtb
+ GROUP BY name
+ HAVING avg_sal>60000;
+
+
