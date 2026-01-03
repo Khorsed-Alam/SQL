@@ -1,0 +1,258 @@
+/* =========================
+   REGIONS
+========================= */
+CREATE TABLE regions (
+    region_id INT PRIMARY KEY,
+    region_name VARCHAR(50)
+);
+
+/* =========================
+   COUNTRIES
+========================= */
+CREATE TABLE countries (
+    country_id CHAR(2) PRIMARY KEY,
+    country_name VARCHAR(50),
+    region_id INT,
+    FOREIGN KEY (region_id) REFERENCES regions(region_id)
+);
+
+/* =========================
+   LOCATIONS
+========================= */
+CREATE TABLE locations (
+    location_id INT PRIMARY KEY,
+    city VARCHAR(50),
+    country_id CHAR(2),
+    FOREIGN KEY (country_id) REFERENCES countries(country_id)
+);
+
+/* =========================
+   DEPARTMENTS
+========================= */
+CREATE TABLE departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50),
+    location_id INT,
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
+
+/* =========================
+   JOBS
+========================= */
+CREATE TABLE jobs (
+    job_id VARCHAR(10) PRIMARY KEY,
+    job_title VARCHAR(50),
+    min_salary DECIMAL(8,2),
+    max_salary DECIMAL(8,2)
+);
+
+/* =========================
+   EMPLOYEES
+========================= */
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    hire_date DATE,
+    job_id VARCHAR(10),
+    salary DECIMAL(8,2),
+    manager_id INT,
+    department_id INT,
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    FOREIGN KEY (manager_id) REFERENCES employees(employee_id),
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+
+/* =========================
+   JOB_HISTORY
+========================= */
+CREATE TABLE job_history (
+    employee_id INT,
+    start_date DATE,
+    end_date DATE,
+    job_id VARCHAR(10),
+    department_id INT,
+    PRIMARY KEY (employee_id, start_date),
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id),
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+
+
+
+
+/* =========================
+   REGIONS
+========================= */
+INSERT INTO regions VALUES
+(1, 'Europe'),
+(2, 'Americas'),
+(3, 'Asia');
+
+/* =========================
+   COUNTRIES
+========================= */
+INSERT INTO countries VALUES
+('UK', 'United Kingdom', 1),
+('FR', 'France', 1),
+('US', 'United States', 2),
+('CA', 'Canada', 2),
+('IN', 'India', 3);
+
+/* =========================
+   LOCATIONS
+========================= */
+INSERT INTO locations VALUES
+(100, 'London', 'UK'),
+(110, 'Paris', 'FR'),
+(120, 'New York', 'US'),
+(130, 'Toronto', 'CA'),
+(140, 'Seattle', 'US'),
+(150, 'Delhi', 'IN');
+
+/* =========================
+   DEPARTMENTS
+========================= */
+INSERT INTO departments VALUES
+(10, 'Administration', 100),
+(20, 'Sales', 120),
+(30, 'IT', 140),
+(40, 'HR', 110),
+(50, 'Shipping', 130),
+(60, 'Finance', 150),
+(70, 'Marketing', NULL);
+
+/* =========================
+   JOBS
+========================= */
+INSERT INTO jobs VALUES
+('AD_PRES', 'President', 15000, 25000),
+('AD_VP', 'Vice President', 12000, 20000),
+('IT_PROG', 'Programmer', 4000, 10000),
+('SA_REP', 'Sales Representative', 3000, 9000),
+('HR_REP', 'HR Representative', 3000, 8000),
+('FI_MGR', 'Finance Manager', 9000, 15000);
+
+/* =========================
+   EMPLOYEES
+========================= */
+INSERT INTO employees VALUES
+(100, 'Steven', 'King', 'king@corp.com', '2000-01-01', 'AD_PRES', 24000, NULL, 10),
+(101, 'Neena', 'Kochhar', 'kochhar@corp.com', '2002-09-21', 'AD_VP', 17000, 100, 10),
+(102, 'Lex', 'DeHaan', 'dehaan@corp.com', '2001-01-13', 'AD_VP', 17000, 100, 10),
+
+(103, 'Alexander', 'Hunold', 'hunold@corp.com', '2006-01-03', 'IT_PROG', 9000, 101, 30),
+(104, 'Bruce', 'Ernst', 'ernst@corp.com', '2007-05-21', 'IT_PROG', 6000, 103, 30),
+(105, 'David', 'Austin', 'austin@corp.com', '2005-06-25', 'IT_PROG', 4800, 103, 30),
+
+(106, 'Valli', 'Pataballa', 'valli@corp.com', '2008-02-05', 'SA_REP', 8000, 101, 20),
+(107, 'Diana', 'Lorentz', 'lorentz@corp.com', '2009-02-07', 'SA_REP', 4200, 106, 20),
+
+(108, 'Nancy', 'Greenberg', 'nancy@corp.com', '2002-08-17', 'FI_MGR', 12000, 101, 60),
+(109, 'Daniel', 'Faviet', 'faviet@corp.com', '2006-08-16', 'HR_REP', 6000, 108, 40);
+
+/* =========================
+   JOB_HISTORY
+========================= */
+INSERT INTO job_history VALUES
+(103, '2004-01-01', '2005-12-31', 'SA_REP', 20),
+(104, '2006-01-01', '2006-12-31', 'SA_REP', 20),
+(106, '2007-01-01', '2008-01-31', 'HR_REP', 40);
+
+
+
+
+---- Question and Solved Query ---- 
+
+
+
+ 
+
+-- Display employee last name and department name. Include employees without departments.
+
+ SELECT e.last_name,d.department_name
+ FROM employees e 
+ join departments d 
+ on d.department_id=e.department_id;
+
+
+ -- List all employee with their city and country
+ 
+ SELECT e.last_name , l.city,c.country_name
+ FROM employees e 
+ join departments d 
+ on d.department_id=e.department_id
+ 
+ join locations l 
+ on l.location_id= d.location_id
+ 
+ join countries c 
+ on c.country_id= l.country_id ;
+
+
+ -- Find employees working in departments located in Seattle.
+ 
+ SELECT e.first_name, e.last_name , l.city
+FROM employees e
+JOIN departments d 
+ON e.department_id = d.department_id
+JOIN locations l
+ON d.location_id = l.location_id
+WHERE l.city = 'Seattle';
+
+
+
+ -- Display departments that have no employees.
+ SELECT d.department_name
+ FROM departments d 
+ WHERE not EXISTS (
+     SELECT 1
+     FROM employees e 
+     WHERE e.department_id= d.department_id
+     );
+
+
+ -- display employee name and their managers name
+ SELECT e.last_name as employees , COALESCE (m.last_name,'No manager') as manager
+ 
+ FROM employees e 
+ left join employees M 
+ on e.employee_id = m.employee_id;
+
+
+-- find employees hired before their manager 
+ 
+ SELECT e.last_name
+ FROM employees e 
+ join employees m 
+ on m.manager_id=e.employee_id
+ WHERE e.hire_date<m.hire_date
+
+
+
+-- List departments that have an employee with job title 'Programmer'.
+
+SELECT department_name
+FROM departments
+WHERE department_id IN (
+    SELECT e.department_id
+    FROM employees e
+    JOIN jobs j ON e.job_id = j.job_id
+    WHERE j.job_title = 'Programmer'
+);
+
+-- Find employees who never changed their job.
+
+SELECT e.first_name, e.last_name
+FROM employees e
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM job_history jh
+    WHERE jh.employee_id = e.employee_id
+);
+
+
+
+
+
