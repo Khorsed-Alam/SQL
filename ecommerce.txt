@@ -1,0 +1,176 @@
+-- (a) Retrieve first name, last name and countries of customers living in countries other than the USA.
+
+SELECT first_name, last_name,country
+from customers
+WHERE country<>'USA';
+
+-- (b) List all orders with a total amount that have a total amount greater than 200 and status “Delivered”.
+
+SELECT order_id, total_amount
+from orders
+WHERE total_amount>200 and status='Delivered';
+
+
+-- (c) List all product names that belong to the “Home & Kitchen” category.
+
+SELECT product_id,product_name
+FROM products p 
+join categories c 
+on p.category_id=c.category_id 
+WHERE c.category_name= 'Home & Kitchen';
+
+
+-- (d) Find all customers’ first name and email whose email contains “example.com”.
+
+SELECT first_name , email
+from customers
+WHERE email like '%example.com%';
+
+
+-- (e) Find all customers’ first name and last name whose last names have exactly 5 characters.
+
+select first_name ,last_name 
+from customers
+WHERE last_name LIKE '_____';
+
+
+-- (f) Find all customer first and last names that contain the letter ‘a’ at least twice in first name or last name or both.
+
+SELECT first_name, last_name
+from customers
+WHERE first_name like '%a%a%'or last_name like '%a%a%';
+
+
+ -- (g) Calculate the total revenue (sum of unit_price × quantity) from Order_Details.
+ 
+ SELECT (unit_price * quantity) as revenue
+ from order_details;
+
+ -- (h) List the category names and how many products each category has.\
+ 
+SELECT category_name , count(p.product_id) as Num_Product 
+FROM categories c 
+JOIN products p
+on c.category_id=p.category_id
+GROUP by c.category_name;
+s
+
+ -- (i) Get the product name and the total quantity sold per product.
+SELECT product_name , sum(od.quantity) as total_quantity
+FROM products p 
+join order_details od 
+on p.product_id=od.product_id 
+GROUP by product_name;
+
+
+ -- (j) Find customers’ first name and last name who have placed at least one order with status “Delivered”
+ 
+ SELECT first_name ,last_name 
+ FROM customers c 
+ join orders o 
+ on c.customer_id=o.customer_id
+ WHERE status = 'delivered';
+
+ -- (k)Find product names that have received reviews with an average rating greater than 4.5.
+ 
+ SELECT product_name ,avg(r.rating) as customers_rating 
+ from products p
+ join reviews r 
+ on p.product_id = r.product_id
+ GROUP by p.product_name 
+ HAVING customers_rating>4.5;
+ 
+
+ --  (l) show product names that have never been ordered 
+ 
+ SELECT product_name 
+ FROM products 
+ WHERE product_id NOT IN (
+     SELECT product_id 
+     FROM order_details
+     );
+ 
+ --   (m) Find the customers’ first name and last name who bought “MacBook Air”
+ 
+ SELECT first_name, last_name 
+ FROM Customers 
+ WHERE customer_id IN (
+     SELECT o.customer_id 
+     FROM Orders o 
+     JOIN Order_Details od 
+     ON o.order_id = od.order_id 
+     JOIN Products p 
+     ON od.product_id = p.product_id 
+     WHERE p.product_name = 'MacBook Air'
+ );
+
+
+-- (n) Display product names that have equal or more reviews than the average number of reviews per product.
+
+SELECT product_name
+FROM Products
+WHERE product_id IN (
+    SELECT product_id
+    FROM Reviews 
+    GROUP BY product_id
+    HAVING COUNT(*) >= (SELECT AVG(review_count)
+                        FROM (SELECT COUNT(*) AS review_count 
+                              FROM Reviews GROUP BY product_id) t));
+
+
+
+
+  -- (p) find all distinct customers’ first name and last name who ordered any product in the “Electronics” category.\
+ 
+SELECT DISTINCT c.first_name ,c.last_name
+FROM customers c 
+JOIN orders o 
+on c.customer_id=o.customer_id 
+JOIN order_details od 
+on o.order_id=od.order_id 
+JOIN products p 
+on od.product_id=p.product_id 
+JOIN categories cat 
+on p.category_id=cat.category_id
+WHERE cat.category_name='Electronics';
+
+
+
+ --  (q) Display all customers’ first name and the total number of orders they have placed.
+
+
+SELECT first_name , COUNT(o.order_id) as total_order
+FROM customers c 
+    left JOIN orders o 
+    on  o.customer_id = o.customer_id
+    GROUP By c.first_name;
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+Question 2 Solution 
+
+1) 
+CREATE table student(
+    student_id int PRIMARY key,
+    first_name VArchar(20) NOT null,
+    last_name varchar(20) not null,
+    email varchar(29) UNIQUE not null,
+    
+    date_of_birth date ,
+    department varchar(20)
+    );
+    
+
+2) 
+
+
